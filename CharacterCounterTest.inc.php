@@ -1,7 +1,9 @@
 <?php
 /*
-Author: Leonardo Matos
-Title: CharacterCounterTest, Class that tests the other class
+Author:
+	Leonardo Matos
+Title:
+	CharacterCounterTest, Class that tests the other class
 */
 class CharacterCounterTest extends PHPUnit_Framework_TestCase{
 

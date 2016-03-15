@@ -1,10 +1,12 @@
 <?php
 /*
-Author: Leonardo Matos
-Title: CharacterCounter, Class that has a method that finds the word with the most repeated chars in a file.
-Description: The findWordWithMostRepeatedChar method iterates over every character in the file and keeps a track of the number of times a character appears in a word using a hashmap. It should run at O(n) time.
+Author:
+	Leonardo Matos
+Title:
+	CharacterCounter, Class that has a method that finds the word with the most repeated chars in a file.
+Description:
+	The findWordWithMostRepeatedChar method iterates over every character in the file and keeps a track of the number of times a character appears in a word using a hashmap. It should run at O(n) time.
 */
-
 class CharacterCounter{		
 	public function findWordWithMostRepeatedChars($filename){
 		if(empty($filename)){
