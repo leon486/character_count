@@ -3,6 +3,8 @@ DESCRIPTION:
 	This is the answer to the requested character counting programming problem sent over email.
 	
 	This answer to the supplied programing problem includes the following files:
+		-README.txt
+			This file.
 		-character_count.php
 			Main file, run this file using the specified instructions below.
 		-CharacterCounter.inc.php
