@@ -2,62 +2,25 @@
 /*
 Author: Leonardo Matos
 Title: CharacterCounter, Class that has a method that finds the word with the most repeated chars in a file.
-Description: The findWordWithMostRepeatedChar method iterates over every character in the file and keeps a track of the number of times a character appears in a word using a hashmap
+Description: The findWordWithMostRepeatedChar method iterates over every character in the file and keeps a track of the number of times a character appears in a word using a hashmap. It should run at O(n) time.
 */
-class CharacterCounter{
-	private $filename;							# The filename being read.
-	private $wordWithMostRepeatedChars	= null;	# The word that has the most repeated number of characters.
-	private $charRepeatCount			= null; # The count of the time that is most repeated character is repeated.
-	
-	#Constructor, has a filename by default
-	public function __construct($filename='shakespeare.txt'){
+
+class CharacterCounter{		
+	public function findWordWithMostRepeatedChars($filename){
 		if(empty($filename)){
-			$filename='shakespeare.txt';
+			echo "Please specify a filename as a parameter\n";
+			exit;
 		}
-		$this->filename = $filename;
-	}
-		
-	public function getFilename(){
-		return $this->filename;
-	}
+		$wordWithMostRepeatedChars	= null;
+		$charRepeatCount		 	= null;
 	
-	public function getWordWithMostRepeatedChars(){
-		return $this->wordWithMostRepeatedChars;
-	}
-	
-	public function getCharRepeatCount(){
-		return $this->charRepeatCount;
-	}
-	
-	#setFilename
-	#Changing the filename resets the most repeated file and the count to 0.
-	#If the file is being changed, then the file and counts would no longer apply. 
-	public function setFilename($filename){
-		$this->filename 					= $filename;
-		$this->wordWithMostRepeatedChars	= null;
-		$this->charRepeatCount				= null;
-	}
-	
-		
-	private function readFile(){
-		$file = fopen($this->filename, "r") or die("Unable to open file: $this->filename, closing...");
-		$text = fread($file,filesize($this->filename));
+		#Read file
+		$file = fopen($filename, "r") or die("Unable to open file: $filename, closing...");
+		$text = fread($file,filesize($filename));
 		fclose($file);
-		return $text;
-	}
-		
-	public function findWordWithMostRepeatedChars(){
-		#Reset word and counter
-		$this->wordWithMostRepeatedChars = null;
-		$this->charRepeatCount		 	 = null;
-		
-		#Read file		
-		$text = $this->readFile();
 		
 		#If file is empty just return an empty result.
 		if (strlen($text) < 1){
-			$this->wordWithMostRepeatedChars = '';
-			$this->charRepeatCount		 	 = 0;
 			return '';
 		}
 		
@@ -76,19 +39,19 @@ class CharacterCounter{
 				#If it is a character ([a-z][A-Z] add it to the hashmap)
 				if (ctype_alpha($letter)){
 					$hash[$letter] = $hash[$letter] + 1;
-					$tmp_max 	   = max(array_values($hash));
 				}
 			}
 			
 			#Have a 'Tournament' over the charRepeatCount among all words in the file.
-			if($tmp_max > $this->charRepeatCount || is_null($this->charRepeatCount)){
-				$this->charRepeatCount				=	$tmp_max;
-				$this->wordWithMostRepeatedChars	=	$word;
+			$maxCharsRepeated = max(array_values($hash));
+			if($maxCharsRepeated > $charRepeatCount || is_null($charRepeatCount)){
+				$charRepeatCount			=	$maxCharsRepeated;
+				$wordWithMostRepeatedChars	=	$word;
 			}
 		}
 		
 		#Return the tournament winner
-		return $this->wordWithMostRepeatedChars;
+		return $wordWithMostRepeatedChars;
 	}
 }
 ?> 
